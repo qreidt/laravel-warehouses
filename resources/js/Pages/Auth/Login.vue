@@ -39,6 +39,18 @@
 					Log in
 				</jet-button>
 			</div>
+
+			<hr class="my-6">
+
+			<div class="block">
+				<span class="ml-2 text-sm text-gray-600">
+					Don't have an account? Create one
+					<inertia-link class="underline text-sm text-gray-600 hover:text-gray-900"
+								  v-if="canRegister" :href="route('register')">
+						here
+					</inertia-link>
+				</span>
+			</div>
 		</form>
 	</jet-authentication-card>
 </template>
@@ -65,6 +77,7 @@ export default {
 
 	props: {
 		canResetPassword: Boolean,
+		canRegister: Boolean,
 		status: String
 	},
 

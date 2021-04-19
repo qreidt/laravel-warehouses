@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Foundation\Application;
 use App\Actions\Jetstream\AddTeamMember;
 use App\Actions\Jetstream\CreateTeam;
 use App\Actions\Jetstream\DeleteTeam;
@@ -9,7 +10,9 @@ use App\Actions\Jetstream\DeleteUser;
 use App\Actions\Jetstream\InviteTeamMember;
 use App\Actions\Jetstream\RemoveTeamMember;
 use App\Actions\Jetstream\UpdateTeamName;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Inertia\Inertia;
 use Laravel\Jetstream\Jetstream;
 
 class JetstreamServiceProvider extends ServiceProvider
@@ -21,7 +24,9 @@ class JetstreamServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		//
+		Inertia::share('canRegister', fn() => Route::has('register'));
+		Inertia::share('laravelVersion', fn() => Application::VERSION);
+		Inertia::share('phpVersion', fn() => PHP_VERSION);
 	}
 
 	/**

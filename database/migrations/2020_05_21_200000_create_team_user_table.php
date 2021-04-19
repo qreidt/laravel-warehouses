@@ -15,10 +15,11 @@ class CreateTeamUserTable extends Migration
 	{
 		Schema::create('team_user', function (Blueprint $table) {
 			$table->id();
-			$table->foreignId('team_id');
-			$table->foreignId('user_id');
+			$table->foreignIdFor(\App\Models\Team::class);
+			$table->foreignIdFor(\App\Models\User::class);
 			$table->string('role')->nullable();
 			$table->timestamps();
+			$table->softDeletes();
 
 			$table->unique(['team_id', 'user_id']);
 		});

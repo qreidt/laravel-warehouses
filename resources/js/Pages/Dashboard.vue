@@ -21,6 +21,11 @@ import AppLayout from '@/Layouts/AppLayout'
 import Welcome from '@/Jetstream/Welcome'
 
 export default {
+
+	props: {
+		user: Object
+	},
+
 	components: {
 		AppLayout,
 		Welcome,
