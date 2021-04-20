@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -17,10 +16,24 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
 	return Inertia::render('Welcome', [
-		'canLogin' => Route::has('login')
+		'canLogin' => Route::has('login'),
+		'userCount' => \App\Models\User::query()->count(),
+		'teamCount' => \App\Models\Team::query()->count(),
+		'warehouseCount' => \App\Models\Warehouse::query()->count(),
+		'productCount' => \App\Models\Product::query()->count()
 	]);
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-	return Inertia::render('Dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+
+	Route::get('/dashboard', function () {
+		return Inertia::render('Dashboard', [
+			'userCount' => \App\Models\User::query()->count(),
+			'teamCount' => \App\Models\Team::query()->count(),
+			'warehouseCount' => \App\Models\Warehouse::query()->count(),
+			'productCount' => \App\Models\Product::query()->count()
+		]);
+	})->name('dashboard');
+
+	Route::resource('warehouses', \App\Http\Controllers\WarehouseController::class);
+});
