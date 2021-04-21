@@ -10,21 +10,27 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public const UNITIES = [
-    	'UNIT' => 1,
-		'KG' => 2,
-		'L' => 3
+    public const UNITS = [
+    	'UNIT', 'KG', 'L'
 	];
 
     protected $fillable = [
-    	'team_id', 'name', 'price', 'unity'
+    	'team_id', 'name', 'price', 'unit'
+	];
+
+    protected $casts = [
+    	'price' => 'float'
 	];
 
 	public function team () {
 		return $this->belongsTo(Team::class);
 	}
 
-	public function products () {
+	public function warehouse_products () {
+		return $this->hasMany(WarehouseProduct::class);
+	}
+
+	public function warehouses () {
 		return $this->belongsToMany(Product::class, 'warehouse_product');
 	}
 }

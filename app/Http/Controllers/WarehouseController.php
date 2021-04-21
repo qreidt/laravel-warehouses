@@ -16,11 +16,12 @@ class WarehouseController extends Controller
 	 * @return \Inertia\Response
 	 * @throws \Exception
 	 */
-    public function index()
+    public function index(Request $request)
     {
 		try {
 
 			$warehouses = Warehouse::query()
+				->where('team_id', $request->user()->current_team_id)
 				->withCount('products')
 				->get();
 
@@ -124,7 +125,7 @@ class WarehouseController extends Controller
 			'complement' => ['nullable']
 		]);
 
-		$warehouse = new Warehouse([
+		$warehouse->fill([
 			'name' => $data['name'],
 			'is_active' => $data['is_active'],
 			'zipcode' => $data['zipcode'],

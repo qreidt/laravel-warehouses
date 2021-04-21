@@ -24,6 +24,10 @@
 								<jet-nav-link :href="route('warehouses.index')" :active="route().current('warehouses.index')">
 									Warehouses
 								</jet-nav-link>
+
+								<jet-nav-link :href="route('products.index')" :active="route().current('products.index')">
+									Products
+								</jet-nav-link>
 							</div>
 						</div>
 
@@ -266,7 +270,7 @@
 			</header>
 
 			<!-- Page Content -->
-			<main>
+			<main class="pb-10">
 				<slot></slot>
 			</main>
 		</div>

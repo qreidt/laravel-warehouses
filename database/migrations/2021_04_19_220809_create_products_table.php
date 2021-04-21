@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->foreignIdFor(\App\Models\Team::class);
             $table->string('name');
             $table->decimal('price', 20, 4);
-            $table->smallInteger('unity');
+            $table->char('unit', 10);
             $table->timestamps();
             $table->softDeletes();
         });
