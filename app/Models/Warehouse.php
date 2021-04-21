@@ -16,7 +16,7 @@ class Warehouse extends Model
 
     protected $casts = [
     	'is_active' => 'boolean',
-		'addres' => 'array'
+		'address' => 'array'
 	];
 
     public function team () {
